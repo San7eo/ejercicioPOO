@@ -50,7 +50,7 @@ namespace EjercicioPoo
             foreach(CLibro libro in  listaLibros) 
             { 
                 if(libro.titulo.ToUpper() == titulo.ToUpper())
-                {
+                {//fggfgf
                     if(libro.prestado)
                     {
                         return dato = "El libro que busca ya se encontra prestado";

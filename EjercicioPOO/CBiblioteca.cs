@@ -44,13 +44,30 @@ namespace EjercicioPoo
             return null;
         }
 
-        public string PrestarLibro(string titulo, uint id)
+        public string ListarTitulos()
         {
-            string dato = "No se encontro el libro que busca dentro del repertorio";
-            foreach(CLibro libro in  listaLibros) 
-            { 
-                if(libro.titulo.ToUpper() == titulo.ToUpper())
-                {//fggfgf
+            string dato = "";
+            ushort I = 0;
+            foreach(CLibro libro in listaLibros)
+            {
+                dato += $" {I} - {libro.titulo} ";
+                if (libro.prestado)
+                {
+                    dato += " - [PRESTADO]\n\n";
+                }
+                else
+                {
+                    dato += "\n\n";
+                }
+                I++;
+            }
+            return dato;
+        }
+        public string PrestarLibro(ushort seleccion, uint id)
+        {
+            string dato = "";
+            CLibro libro = listaLibros[seleccion]; 
+           
                     if(libro.prestado)
                     {
                         return dato = "El libro que busca ya se encontra prestado";
@@ -69,18 +86,13 @@ namespace EjercicioPoo
                             return dato = "El estudiante que indico no se encuentra dentro de la lista debe registrarlo primero";
                         }
                     }
-                } 
-            }
-            return dato;
         }
 
-        public string DevolverLibro(string titulo, uint id)
+        public string DevolverLibro(ushort seleccion, uint id)
         {
-            string dato = "No se encontro el libro que busca dentro del repertorio";
-            foreach (CLibro libro in listaLibros)
-            {
-                if (libro.titulo.ToUpper() == titulo.ToUpper())
-                {
+            string dato = "";
+            CLibro libro = listaLibros[seleccion];
+
                     if (libro.prestado)
                     {
                         CEstudiante estudiante = BuscarEstudiante(id);
@@ -90,14 +102,15 @@ namespace EjercicioPoo
                             estudiante.libros.Remove(libro);
                             return dato = "Se devolvio el libro del estudiante y ahora se encuentra desocupado!";
                         }
+                        else
+                        {
+                            return dato = "No se encontro al estudiante";
+                        }
                     }
                     else
                     {
                         return dato = "El libro ya se encontraba a disposicion en primera instancia";
                     }
-                }
-            }
-            return dato;
         }
 
         public string ListarLibros()
@@ -108,7 +121,7 @@ namespace EjercicioPoo
             {   
                 if(libro.prestado)
                 {
-                    dato += $"{libro.DarDatos()} [PRESTADO]\n\n";
+                    dato += $"{libro.DarDatos()}\n[PRESTADO]\n\n";
                 }
                 else
                 {

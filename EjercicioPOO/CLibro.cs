@@ -19,7 +19,7 @@ namespace EjercicioPoo
         }
         public string DarDatos()
         {           
-            return $"Titulo: {this.titulo}  -  Autor: {this.autor} - Descripcion: {this.descripcion} ";          
+            return $"Titulo: {this.titulo}  -  \nAutor: {this.autor} - \nDescripcion: {this.descripcion} ";          
         }
        
     }

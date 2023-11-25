@@ -23,6 +23,7 @@ namespace EjercicioPoo
                 char opcion;
                 uint id;
                 string titulo;
+                ushort seleccion;
                 do
                 {
                     
@@ -49,16 +50,28 @@ namespace EjercicioPoo
                             {
                                 CInterfaz.MostrarInfo("El identificador debe ser un entero sin signo");
                             }
-                            titulo = CInterfaz.PedirDato("Titulo de la obra");
-                            CInterfaz.MostrarInfo(Biblioteca.PrestarLibro(titulo,id));
+                            CInterfaz.MostrarInfo(Biblioteca.ListarTitulos());
+                            seleccion = ushort.Parse(CInterfaz.PedirDato("Seleccione el indice del libro que desea prestar"));
+                            while (seleccion < 0 || seleccion > Biblioteca.listaLibros.Count)
+                            {
+                                CInterfaz.MostrarInfo("La entrada ingresada no corresponde");
+                                seleccion = ushort.Parse(CInterfaz.PedirDato("Seleccione el indice del libro que desea prestar"));
+                            }
+                            CInterfaz.MostrarInfo(Biblioteca.PrestarLibro(seleccion,id));
                             break;
                         case 'C':
                             while (uint.TryParse(CInterfaz.PedirDato("Identificador del estudiante que desea devolver el libro"), out id) == false)
                             {
                                 CInterfaz.MostrarInfo("El identificador debe ser un entero sin signo");
                             }
-                            titulo = CInterfaz.PedirDato("Titulo de la obra que quiere devolver");
-                            CInterfaz.MostrarInfo(Biblioteca.DevolverLibro(titulo,id));
+                            CInterfaz.MostrarInfo(Biblioteca.ListarTitulos());
+                            seleccion = ushort.Parse(CInterfaz.PedirDato("Seleccione el indice del libro que desea devolver"));
+                            while (seleccion < 0 || seleccion > Biblioteca.listaLibros.Count)
+                            {
+                                CInterfaz.MostrarInfo("La entrada ingresada no corresponde");
+                                seleccion = ushort.Parse(CInterfaz.PedirDato("Seleccione el indice del libro que desea devolver"));
+                            }
+                            CInterfaz.MostrarInfo(Biblioteca.DevolverLibro(seleccion,id));
                             break;
                         case 'D':
                             CInterfaz.MostrarInfo(Biblioteca.ListarLibros());

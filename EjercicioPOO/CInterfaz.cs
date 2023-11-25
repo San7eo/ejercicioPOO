@@ -34,7 +34,7 @@ namespace EjercicioPoo
             string ingreso = Console.ReadLine();
             while (ingreso == "")
             {
-                Console.Write("[!] " + nombDato + "es de ingreso OBLIGATORIO:");
+                Console.Write("\n[!] " + nombDato + "es de ingreso OBLIGATORIO:");
                 ingreso = Console.ReadLine();
             }
             Console.Clear();
